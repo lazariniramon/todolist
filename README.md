@@ -3,7 +3,7 @@ Teste da Teknisa
 
 Criado para relacionar e gerênciar as tarefas do dia a dia.
 
-Como configurar
+_**Como configurar**_
 
 **Crie o banco de dados**
 
