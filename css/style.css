@@ -5,6 +5,8 @@ body {
 h2{
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center !important;
+  margin: 15px !important;
 }
 a:hover, a:visited, a:link, a:active
 {
@@ -23,22 +25,6 @@ input {
 * {
   box-sizing: border-box;
 }
-
-/* Style the header */
-.header {
-  background-color: #9AD6D4;
-  padding: 30px 40px;
-  color: white;
-  text-align: center;
-}
-
-/* Clear floats after the header */
-.header:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 /* Style the input */
 input {
   border: none;
@@ -49,19 +35,7 @@ input {
   color:#000 !important;
 }
 
-/* Style the "Add" button */
-.addBtn {
-  padding: 10px;
-  width: 25%;
-  background: #d9d9d9;
-  color: #555;
-  float: left;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.addBtn:hover {
-  background-color: #bbb;
+.cabecalho {
+  background-color:#b3b3ff;
+  height: 125px;
 }
