@@ -1,6 +1,4 @@
 # todolist
-Teste da Teknisa
-
 Criado para relacionar e gerênciar as tarefas do dia a dia.
 
 _**Como configurar**_
