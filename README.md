@@ -1,11 +1,11 @@
 # todolist
-Criado para relacionar e gerênciar as tarefas do dia a dia.
+Criado para relacionar e gerenciar as tarefas do dia a dia.
 
 _**Como configurar**_
 
 **Crie o banco de dados**
 
-	•Utilizando o a query SQL disponibilizada crie o banco de dados.
+	•Utilizando a query SQL disponibilizada crie o banco de dados.
 
 **Configure o config.php**
 
