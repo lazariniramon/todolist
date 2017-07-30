@@ -8,6 +8,7 @@ abstract class Crud extends DB{
 
 	abstract public function insert();
 	abstract public function update($id, $checked);
+	abstract public function updateTarefa($id, $checked);
 
 	public function find($id){
 		$sql  = "SELECT * FROM $this->table WHERE id = :id";

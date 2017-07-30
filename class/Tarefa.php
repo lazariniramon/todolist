@@ -47,4 +47,11 @@ class Tarefa extends Crud{
 		$stmt->bindParam(':id', $id);
 		return $stmt->execute(); 
 	}
+	public function updateTarefa($id, $tarefa){
+		$sql = "UPDATE $this->table SET tarefa = :tarefa WHERE id = :id";
+		$stmt = DB::prepare($sql);
+        $stmt->bindParam(":tarefa",$tarefa);
+		$stmt->bindParam(':id', $id);
+		return $stmt->execute(); 
+	}
 }

@@ -2,7 +2,7 @@
 function __autoload($class_name){
 	require_once 'class/' . $class_name . '.php';
 }
-$Tarefa = new Tarefa();
+$Tarefas = new Tarefa();
 ?>
 <html>
 <head>
@@ -18,9 +18,9 @@ $Tarefa = new Tarefa();
 		if (isset($_POST['cadastrar'])) {
 			$nometarefa = $_POST['nometarefa'];
 			if ($nometarefa != '') {
-				$Tarefa->setTarefa($nometarefa);
-				$Tarefa->setFeito(0);
-				if ($Tarefa->insert()) {
+				$Tarefas->setTarefa($nometarefa);
+				$Tarefas->setFeito(0);
+				if ($Tarefas->insert()) {
 					$avisoCadastro = '	<br/><div class="alert alert-success alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					Cadastrado com sucesso!
@@ -37,7 +37,7 @@ $Tarefa = new Tarefa();
 		//Realiza o delete de uma tarefa no banco
 if (isset($_GET['acao']) && $_GET['acao'] == 'deletar') {
 	$id = (int)$_GET['id'];
-	if ($Tarefa->delete($id)) {
+	if ($Tarefas->delete($id)) {
 		$redirect = "index.php";
 		header("location:$redirect");
 	}
@@ -47,7 +47,16 @@ if (isset($_GET['acao']) && $_GET['acao'] == 'deletar') {
 if (isset($_GET['acao']) && $_GET['acao'] == 'atualizar') {
 	$id = (int)$_GET['id'];
 	$checked = (int)$_GET['checked'];
-	if ($Tarefa->update($id, $checked)) {
+	if ($Tarefas->update($id, $checked)) {
+		$redirect = "index.php";
+		header("location:$redirect");
+	}
+}
+		//Atualiza o nome da tarefa no banco
+if (isset($_GET['acao']) && $_GET['acao'] == 'atualizarTarefa') {
+	 $id = (int)$_GET['id'];
+	echo $nometarefa = $_GET['tarefa'];
+	if ($Tarefas->updateTarefa($id, $nometarefa)) {
 		$redirect = "index.php";
 		header("location:$redirect");
 	}
@@ -83,32 +92,37 @@ if (isset($_GET['acao']) && $_GET['acao'] == 'atualizar') {
 <div class="container ">
 	<table class="table">
 		<tbody>
-			<?php foreach($Tarefa->findAll() as $Tarefa){ 
+			<?php foreach($Tarefas->findAll() as $Tarefa){ 
 				$verde = $Tarefa['feito']==0 ?  "" : "class='alert alert-success' role='alert'";
 				$feito = $Tarefa['feito']==0 ?  "&nbsp;&nbsp;&nbsp;&nbsp;" : "<span class='glyphicon glyphicon-ok'aria-hidden='true'></span>"; 
 				$checked = $Tarefa['feito']==1 ?  0 : 1; 
 				?>
 				<tr <?php echo $verde ?>>
-					<td  class="col-md-11" title='Clique aqui para finalizar a tarefa.' >
+					<td  class="col-md-10" title='Clique aqui para finalizar a tarefa.' >
 						<?php
 						echo "<a href='index.php?acao=atualizar&id=". $Tarefa['id']."&checked=".$checked."' ><div class='col-md-12'>".$feito."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".$Tarefa['tarefa']."</div></a>";
 						?>
 					</td>
-					<td  class="col-md-1" >
+					<td  class="col-md-2" >
+						<!--  -->
+						<?php 
+						$tarefa = $Tarefa['tarefa'];
+						echo '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-default" data-toggle="modal" href="update.php?id='.$Tarefa['id'].'"><span class="glyphicon glyphicon-pencil" aria-hidden="true" ><i class="icon-zoom-in"></i> </span></button>'; ?>
+						
 						<!-- botão pra excluir na tabela -->
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#confirm"><span class='glyphicon glyphicon-trash'aria-hidden='true'></span></button>
-						<!-- Modal com mensagem que será exibida para excluir a tarefa. -->
-						<div class="modal fade" id="confirm" role="dialog">
-							<div class="modal-dialog modal-md">
-
+						<?php echo '<button data-toggle="modal" data-target="#myModalDelete" type="button" class="btn btn-default" data-toggle="modal" href="delete.php?id='.$Tarefa['id'].'"><span class="glyphicon glyphicon-trash" aria-hidden="true" ><i class="icon-zoom-in"></i> </span></button>'; ?>
+						<!-- Janela Modal -->
+						<div class="modal fade" id="myModalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
 								<div class="modal-content">
-									<div class="modal-body">
-										<p> Quer realmente apagar essa tarefa?</p>
-									</div>
-									<div class="modal-footer">
-										<a href="index.php?acao=deletar&id=<?php echo $Tarefa['id']; ?>" type="button" class="btn btn-danger" id="delete">Apagar tarefa</a>
-										<button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-									</div>
+									<div class="modal-body"><div class="te"></div></div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-body"><div class="te"></div></div>
 								</div>
 							</div>
 						</div>
