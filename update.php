@@ -29,7 +29,7 @@ $Tarefa = $Tarefas->find($_GET['id']);
 
 	</div>			
 	<div class="modal-footer">
-				<button type="submit" class="btn btn-success">Cadastrar</button>
+				<button type="submit" class="btn btn-success">Atualizar</button>
 		<button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
 	</div>
 </form>
